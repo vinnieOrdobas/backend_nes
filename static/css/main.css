@@ -1,0 +1,28 @@
+body {
+  font-family: 'Press Start 2P', cursive;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  margin-top: 150px;
+}
+
+.table {
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+    justify-content: center;
+}
+
+.icon {
+  display: flex;
+}
+
+/* Dialog modals */
+.dialog-menu {
+  display: flex;
+  justify-content: space-evenly;
+}

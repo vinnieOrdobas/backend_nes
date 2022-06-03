@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Shopify Backend Challenge</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="nes-container with-title is-centered">
+            {% if products|length < 1 %}
+            <p class="nes-balloon from-left nes-pointer">
+                The inventory is empty! Add a product below!
+            </p>
+            <div class="icon">
+                <i class="nes-kirby"></i>
+            </div>
+            {% else %}
+            <h1 class="title">Inventory Management</h1>
+            <div class="table">
+                <div class="nes-table-responsive">
+                    <table class="nes-table is-bordered is-centered">
+                        <thead>
+                        <tr>
+                            <td>Product</td>
+                            <td>Description</td>
+                            <td>Price</td>
+                            <td>Quantity</td>
+                            <td>Actions</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for product in products %}
+                            <tr>
+                                <td>{{ product.name }}</td>
+                                <td>{{ product.description }}</td>
+                                <td>{{ product.price }}</td>
+                                <td>{{ product.quantity }}</td>
+                                <td>
+                                    <button type="button" class="nes-btn is-primary" onclick="document.getElementById('dialog-rounded-update-product-{{ product.id }}').showModal();">
+                                        Update
+                                    </button>
+                                    <br>
+                                    <button type="button" class="nes-btn is-error" onclick="document.getElementById('dialog-rounded-delete-product-{{ product.id }}').showModal();">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% endif %}
+                    <div class="nes-field">
+                        <form action="/" method="POST">
+                            <label for="product_name">Product</label>
+                            <br>
+                            <input type="text" name="product_name" id="product_name" placeholder="Name of the product" class="nes-input">
+                            <br>
+                            <label for="description">Description</label>
+                            <br>
+                            <textarea rols="10" col="200" name="description" id="description" placeholder="Describe product here" class="nes-textarea"></textarea>
+                            <br>
+                            <label for="product">Price</label>
+                            <br>
+                            <input type="number" name="price" id="price" placeholder="Price of the product" class="nes-input">
+                            <br>
+                            <label for="quantity">Quantity</label>
+                            <br>
+                            <input type="number" name="quantity" id="quantity" placeholder="Quantity in stock" class="nes-input">
+                            <br>
+                            <button type="submit" value="Add Product" class="nes-btn is-success">Add Product</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Dialog box -->
+    {% for product in products %}
+    <section>
+        <dialog class="nes-dialog" id="dialog-rounded-delete-product-{{ product.id }}">
+          <form method="dialog">
+            <p class="title">Are you sure you want to delete this product?</p>
+            <p>Press confirm to delete or cancel to go back</p>
+            <menu class="dialog-menu">
+                <a href="/delete/{{ product.id }}" class="nes-btn is-primary">Confirm</a>
+              <button class="nes-btn is-error">Cancel</button>
+            </menu>
+          </form>
+        </dialog>
+    </section>
+    <section>
+        <dialog class="nes-dialog" id="dialog-rounded-update-product-{{ product.id }}">
+          <form action="/update/{{ product.id }}" method="POST">
+            <label for="product_name">Product</label>
+            <br>
+            <input type="text" name="product_name" id="product_name" value="{{ product.name }}" class="nes-input">
+            <br>
+            <label for="description">Description</label>
+            <br>
+            <textarea rols="10" col="200" name="description" id="description" class="nes-textarea">{{ product.description }}</textarea>
+            <br>
+            <label for="product">Price</label>
+            <br>
+            <input type="number" name="price" id="price" value="{{ product.price }}" class="nes-input">
+            <br>
+            <label for="quantity">Quantity</label>
+            <br>
+            <input type="number" name="quantity" id="quantity" value="{{ product.quantity }}" class="nes-input">
+            <menu class="dialog-menu">
+                <button type="submit" class="nes-btn is-primary">Confirm</button>
+              <button class="nes-btn is-error">Cancel</button>
+            </menu>
+          </form>
+        </dialog>
+    </section>
+    {% endfor %}
+{% endblock %}
