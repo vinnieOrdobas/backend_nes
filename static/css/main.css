@@ -24,6 +24,10 @@ body {
 .a-button {
   color: white;
 }
+
+.push-down {
+  margin-top: 20px;
+}
 /* Dialog modals */
 .dialog-menu {
   display: flex;
