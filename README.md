@@ -5,7 +5,7 @@
 
 Web-app created with Python, Flask, Flask-SQLAlchemy and NES.css.
 GitHub repo [on this link](https://github.com/vinnieOrdobas/backend_nes).
-Deployed to Repl.it on this [link](https://replit.com/@vinnieOrdobas/Shopify-Backend-Challenge-Fall-2022).
+Deployed to Repl.it on this [link](https://replit.com/@vinnieOrdobas/Shopify-Backend-Intern-Challenge).
 
 To run project on repl.it, follow the below steps (see screenshot for reference):
 
